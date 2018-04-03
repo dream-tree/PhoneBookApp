@@ -1,0 +1,14 @@
+bin/
+*.txt
+.classpath
+build.fxbuild
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+
