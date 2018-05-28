@@ -1,3 +1,0 @@
-# PhoneBookApp
-
-Project in progress.
