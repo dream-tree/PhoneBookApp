@@ -9,36 +9,47 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
-	 * @author dream-tree
-	 * Class compose person ... !!!
-	 * ver. 1.0
-	 */
-
+ * Person is the entity used to create contact entries in the phone base (database).
+ * Each "valid" Person object has the first name, the last name and the phone number.
+ * Valid object means an object ready to be saved, deleted or updated in the phone base (database).
+ * There are also "invalid" Person objects consisting of first and last name only.
+ * These objects are constructed by the application logic only to note exceptional behaviour
+ * if no contacts are found by the search engine.
+ * They might be constructed in 3 classes as listed below: 
+ * <ul>
+ *  <li>{@link com.marcin.phone.data.InputValidator#isPhoneNumberUnique(int)}</li>
+ *  <li>{@link com.marcin.phone.controllers.CenterGridController#processUserInput()}</li>
+ *  <li>{@link com.marcin.phone.data.DataSearch#searchByNumber(int)}</li>
+ * </ul>
+ * Invalid objects cannot be saved to the phone base (database).
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Component
-@Entity
-@Table(name="person")
-public class Person/* implements Comparable<Person>*/ {
+@Getter
+@Setter
+public class Person {
 
-	@Column(name="first_name")
 	String firstName;
-	@Column(name="last_name")
 	String lastName;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)  
-	@Column(name="number")
 	int number;
-	
-	// TODO
-	// ch if Lombok works with necessary getters and setters by JPA
+
+	/**
+	 * Deafult Person constructor used by org.springframework.beans.factory.
+	 */
 	public Person() {		
 	}
 		
 	/**
-	 * @param firstName first name of requested person
-	 * @param lastName last name of requested person
-	 * @param nick nickname of requested person
-	 * @param number phone number of requested person
+	 * Constructs a "valid" Person instance as described in {@link Person}.
+	 * @param firstName first name of phone base contact (person)
+	 * @param lastName last name of phone base contact (person)
+	 * @param number phone number of phone base contact (person)
 	 */
 	public Person(String firstName, String lastName, int number) {
 		super();
@@ -47,52 +58,15 @@ public class Person/* implements Comparable<Person>*/ {
 		this.number = number;
 	}
 	
+	/**
+	 * Constructs an "invalid" Person instance as described in {@link Person}.
+	 * @param firstName first name of phone base contact (person)
+	 * @param lastName last name of phone base contact (person)
+	 */
 	public Person(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the number
-	 */
-	public int getNumber() {
-		return number;
-	}
-
-	/**
-	 * @param number the number to set
-	 */
-	public void setNumber(int number) {
-		this.number = number;
 	}
 
 	/* (non-Javadoc)
@@ -100,13 +74,8 @@ public class Person/* implements Comparable<Person>*/ {
 	 */
 	@Override
 	public String toString() {
-		//	if no entry found in PhoneBase, then output has to be different
-		if(this.lastName.equals("")) {
-			return String.format("%s", firstName);
-		} else {
-			// %,d: Requires the output to include the locale-specific group separators (Poland: 1 000 000).
-			return String.format("Phone number:  %,d  of %s %s", number, firstName, lastName);
-		}
+		// %,d: Requires the output to include the locale-specific group separators (Poland: xxx xxx xxx).
+		return String.format("Phone number:  %,d  of %s %s", number, firstName, lastName);
 	}
 
 	/* (non-Javadoc)
@@ -148,11 +117,4 @@ public class Person/* implements Comparable<Person>*/ {
 			return false;
 		return true;
 	}
-	
-/*	@Override
-	public int compareTo(Person p) {	
-		
-		
-		 return this.number-p.number;  			
-	}	*/
 }

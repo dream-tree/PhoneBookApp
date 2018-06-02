@@ -7,29 +7,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.marcin.phone.data.DataSearch;
 import com.marcin.phone.model.Person;
 
+/**
+ * Class is responsible for adding, modifying and removing contacts i.e., Person objects
+ * to/from the uploaded contact list - List collection.
+ * Once the List collection update is done, such a contact list is forwarded to the 
+ * {@link com.marcin.phone.repository.PhoneBaseDAO} responsible for saving contacts as the persistent data. 
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Component
 public class DataOperations {
 	
 	private PhoneBaseDAO base;
-/*	private DataSearch baseSearching;*/
 	private List<Person> list;
 	
 	@Autowired
-	public DataOperations(@Qualifier(value="txt") PhoneBaseDAO base/*, DataSearch baseSearching*/) {
+	public DataOperations(@Qualifier(value="csv") PhoneBaseDAO base) {
 		this.base = base;
-/*		this.baseSearching = baseSearching;*/
 		list = base.getPersonList();
-	//	baseSearching.setPersonList(list);	
 	}	
 	
 	/**
 	 * Modifies contact selected by user.
-	 * Operation has two phases:
-	 * (1) it removes contact selected by user from the list and 
-	 * (2) adds modified version of selected contact to the list.
+	 * Each operation has two phases:
+	 * <ol>
+	 *  <li>it removes single contact selected by user from the list and</li> 
+	 *  <li>adds modified version of the selected contact to the list.</li>
+	 * <ol>
 	 * @param chosenContact contact selected by user
 	 * @param modifiedContact contact after modification by user
 	 */	
@@ -46,7 +53,7 @@ public class DataOperations {
 	}
 	
 	/**
-	 * adds new person specified by user to contact list
+	 * Adds new person (contact) specified by user to the contact list.
 	 * @param newPerson person to add to contact list
 	 */
 	public void addToList(Person newPerson) {
@@ -55,6 +62,10 @@ public class DataOperations {
 		base.saveUpdatedEntries(list);
 	}	
 	
+	/**
+	 * Removes person (contact) selected by user from the contact list.
+	 * @param newPerson person to add to contact list
+	 */
 	public void removeFromList(Person deletedContact) {
 		for(Iterator<Person> it = list.iterator(); it.hasNext(); ) {
 			Person temp = it.next();
@@ -66,9 +77,9 @@ public class DataOperations {
 	}
 	
 	/**
-	 * capitalizes first letter of first and last name and 
-	 * converts all other characters in first and last name to lower case
-	 * @param modifiedContact contact after modification by user
+	 * Capitalizes first letter of the first and last name and 
+	 * converts all other characters in the first and last name to lower case.
+	 * @param modifiedContact contact after modification by user.
 	 */
 	public void toUpperAndLowerCase(Person modifiedContact) {
 		StringBuilder first = new StringBuilder(modifiedContact.getFirstName());
@@ -82,11 +93,9 @@ public class DataOperations {
 	}
 
 	/**
-	 * @return the list
+	 * @return the list of contacts
 	 */
 	public List<Person> getList() {
 		return list;
 	}
-	
-	
 }

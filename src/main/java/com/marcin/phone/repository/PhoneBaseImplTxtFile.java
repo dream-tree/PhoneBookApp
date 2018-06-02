@@ -15,11 +15,16 @@ import org.springframework.stereotype.Repository;
 import com.marcin.phone.model.Person;
 
 /**
- * Class implements interface for retrieving and storing data (phone numbers base i.e. 
- * phone numbers belonging to individual persons).
- * Class reads data from a .txt file containing all contacts (phone numbers base)
- * and saves contacts into a .txt file again if the base was changed while using it.
+ * Class implements interface for reading from a persistent store all available contacts by loading data from a .txt file.
+ * It is also responsible for saving all available contacts to a .txt file again.
+ * All loaded contacts are stored in a List collection (called phone base).
+ * This List collection is retrieved by {@see DataOpertions} class for proper action chosen by user i.e.,
+ * for likely adding new contact, removing existing contact or modifying existing contact.
+ * Once the List collection is modified, it's returned to PhoneBaseImplTxtFile 
+ * and the updated List collection is saved in the .txt file again.
+ * 
  * @author dream-tree
+ * @version 3.00, January-May 2018
  */
 @Repository
 @Qualifier(value="txt")
@@ -32,13 +37,13 @@ public class PhoneBaseImplTxtFile implements PhoneBaseDAO {
 	}
 	
 	/** 
-	 * Reads all data from a .txt file containing all contacts (phone numbers base)
-	 * and converts all String entries into List<Person> object.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Person> readEntries() {
-		List<String> txtList = new ArrayList<>();		
-		Path path = FileSystems.getDefault().getPath("src/main/java/phonebookList.txt");
+		List<String> txtList = new ArrayList<>();
+		// reading all contacts from a .txt file 
+		Path path = FileSystems.getDefault().getPath("src/main/resources/phonebookList.txt");
 		try {
 			txtList = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
 		} catch (IOException e) {
@@ -50,6 +55,7 @@ public class PhoneBaseImplTxtFile implements PhoneBaseDAO {
 		int number = 0;		
 		Scanner in = null;
 		
+		// converting all String entries into List<Person> objects
 		List<Person> list = new ArrayList<>();
 			for(int i = 0; i < txtList.size(); i++) {
 				String oneLineToFrags = txtList.get(i);
@@ -64,29 +70,35 @@ public class PhoneBaseImplTxtFile implements PhoneBaseDAO {
 		return list;		
 	}
 	
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Person> getPersonList() {
 		return personList;
 	}
-	 	
+
 	/** 
-	 * Saves new person data in the base (PhoneBook)
-	 * and creates .txt file containing all contacts (the whole phone numbers base) altogether with freshly added contact(s)
-	 * by converting List<Person> into String entries
-	 * @param firstName first name of new person
-	 * @param lastName last name of new person
-	 * @param nick nickname name of new person
-	 * @param phoneNumber phone number of new person
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void saveUpdatedEntries(List<Person> updatedList) {
 		List<String> updatedTxtList = new ArrayList<>();
 		// TODO: use StringBuilder
-		for (Person person : updatedList) {
+		// converting List<Person> into String entries for the .txt file
+/*		for (Person person : updatedList) {
 			updatedTxtList.add(person.getFirstName() + " " + person.getLastName() + " " + " " 
 			+ String.valueOf(person.getNumber()));			
+		}*/
+		for (Person person : updatedList) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(person.getFirstName()).append(" ");
+			sb.append(person.getLastName()).append("  ");
+			sb.append(String.valueOf(person.getNumber()));
+			updatedTxtList.add(sb.toString());			
 		}
-		Path path = FileSystems.getDefault().getPath("src/main/java/phonebookList.txt");
+		
+		Path path = FileSystems.getDefault().getPath("src/main/resources/phonebookList.txt");
 		try {
 			Files.write(path, updatedTxtList);		
 		} catch (IOException e) {

@@ -14,6 +14,12 @@ import com.marcin.phone.views.MainView;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
+/**
+ * Controller for the application left Vbox menu.
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Controller
 public class LeftBoxMenuController {
 	
@@ -64,6 +70,10 @@ public class LeftBoxMenuController {
 	    });
 	}	
 	
+	/**
+	 * Clears app info displayed after taking new action by user.
+	 * @param appInfo app info to be cleared 
+	 */
 	public void clearAppInfo(Label[] appInfo) {
     	for(int i = 0; i < 11; i++) {
     		appInfo[i].setText("");	
@@ -71,11 +81,20 @@ public class LeftBoxMenuController {
     	}
 	}
 
+	/**
+	 * Displays contacts in a way chosen by user:
+	 * <ul>
+	 *  <li>sorted by first name or</li>
+	 *  <li>sorted by last name or</li>
+	 *  <li>sorted by phone number.</li>
+	 * <ul>
+	 * @param sortingIndentifier identifier denoting the chosen way of sorting the phone base contacts 
+	 * for the purpose of displaying in the application main window
+	 */
 	public void showSortedContacts(String sortingIndentifier) {
 		clearAppInfo(appInfo);
     	Set<Person> allContacts = dataSearch.showAllBase();
  
-    // 	Comparator<Person> firstNamePersonComparator = new FirstNamePersonComparator();
     	Person[] sortedContacts = allContacts
     			.stream()
     			.sorted(sortingIndentifier.equals("firstNameOrder") ? firstNamePersonComparator
@@ -89,17 +108,21 @@ public class LeftBoxMenuController {
     		i++;
     	}     	
     	for(Person x : sortedContacts) {
+			if(x.getFirstName().equals("No contact found.")) continue;
     		appInfo[i].setText(x.toString());
     		i++;
     		if(i > 10) break;
-    	}	
-    	
+    	}	   	
     	dataSearch.getFoundContacts().clear();
 	}
 	
+	/**
+	 * Displays random contacts.
+	 */
 	public void showRandomContacts() {
     	clearAppInfo(appInfo);
     	Set<Person> allContacts = dataSearch.showAllBase();
+    	
     	Person[] converted = allContacts
     			.stream()
     			.toArray(Person[]::new);

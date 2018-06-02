@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.marcin.phone.StartApplication;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -15,6 +16,12 @@ import javafx.scene.control.SeparatorMenuItem;
 import lombok.AccessLevel;
 import lombok.Getter;
 
+/**
+ * Class creates menu bar for the application main view.
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Getter
 @Component
 public class MenuView {
@@ -41,6 +48,9 @@ public class MenuView {
 	public MenuView() {	
 	}
 	
+	/**
+	 * Creates MenuBar for the application main view.
+	 */
 	public MenuBar initMenuBar() {
 		menuBar = new MenuBar();
 		
@@ -70,10 +80,11 @@ public class MenuView {
 	 * Shows the basic information about the application rules.
 	 */
 	public void userInfoAlert() {
-		Alert alert = new Alert(AlertType.INFORMATION, "Content here", ButtonType.OK);
-		alert.getDialogPane().setPrefSize(750, 420);
-		alert.setX(StartApplication.getPrimaryStage().getX() + 25);
-		alert.setY(StartApplication.getPrimaryStage().getY() + 100);
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.getDialogPane().setPrefSize(750, 500);
+		alert.getDialogPane().setPadding(new Insets(0, 30, 0, 0));
+		alert.setX(StartApplication.getPrimaryStage().getX() + 30);
+		alert.setY(StartApplication.getPrimaryStage().getY() + 75);
 		alert.setTitle("---User info---");	 
 		alert.setHeaderText(null);
 		alert.setContentText(userInfo);	 
@@ -93,43 +104,4 @@ public class MenuView {
 		alert.setContentText(aboutInfo);	 
 		alert.showAndWait();
 	}
-
-/*	*//**
-	 * @return the menuFileItem1
-	 *//*
-	public MenuItem getMenuFileItem1() {
-		return menuFileItem1;
-	}
-
-	*//**
-	 * @return the menuFileItem2
-	 *//*
-	public MenuItem getMenuFileItem2() {
-		return menuFileItem2;
-	}
-
-	*//**
-	 * @return the menuFileItem3
-	 *//*
-	public MenuItem getMenuFileItem3() {
-		return menuFileItem3;
-	}
-
-	*//**
-	 * @return the menuAboutItem
-	 *//*
-	public MenuItem getMenuAboutItem() {
-		return menuAboutItem;
-	}
-
-	*//**
-	 * @return the menuExitItem
-	 *//*
-	public MenuItem getMenuExitItem() {
-		return menuExitItem;
-	}	*/
-	
-	
-	
-	
 }

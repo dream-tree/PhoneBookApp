@@ -5,6 +5,12 @@ import org.springframework.stereotype.Controller;
 
 import com.marcin.phone.views.MenuView;
 
+/**
+ * Controller for the application the main (top) Menu.
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Controller
 public class MenuController {
 
@@ -15,6 +21,9 @@ public class MenuController {
 		this.menuView = menuView;
 	}
 	
+	/**
+	 * Initializes controller for the main (top) Menu.
+	 */
 	public void initMenuController() {	
 		menuView.getMenuFileItem1().setOnAction(t -> menuView.userInfoAlert());	
 		menuView.getMenuFileItem2().setOnAction(t -> System.out.println("unavailable"));		

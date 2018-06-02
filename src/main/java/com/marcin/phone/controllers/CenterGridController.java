@@ -28,6 +28,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Controller for the application main window.
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Controller
 public class CenterGridController {
 	
@@ -42,7 +48,7 @@ public class CenterGridController {
 	private DataSearch dataSearch;
 	
 	@Autowired
-	public CenterGridController(DataOperations model, CenterGridView grid, 
+	public CenterGridController(DataOperations dataOperations, CenterGridView grid, 
 			FillingFormView formView, FillingFormController fillingFormController, DataSearch dataSearch) {
 		this.dataOperations = dataOperations;
 		this.grid = grid;
@@ -51,20 +57,28 @@ public class CenterGridController {
 		this.dataSearch = dataSearch;
 	}
 	
+	/**
+	 * Initializes the controller for the application main window i.e.,
+	 * controller for Submit button,
+	 * controller for Search button,
+	 * controller for Change button,
+	 * controller for Add button and
+	 * controller for Delete button.
+	 */
 	public void initController() {
 		appInfo = grid.getAppInfo();
 		radioButtonArray = grid.getRadioButtonArray();
 		radioButtonGroup = grid.getRadioButtonGroup();
 	    
 		/**
-		 * setting an action for the Submit button (mouse)
+		 * Setting an action for the Submit button (mouse).
 		 */
 		grid.getSubmitButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 		    public void handle(ActionEvent e) {
 	    		// clearing previous "searches" (all Label[] entries and RadioButton[] buttons)
 				clearAppInfo(appInfo);
-		        if((grid.getSearchBar().getText() != null && !grid.getSearchBar().getText().isEmpty())) {    // !!! important stub
+		        if((grid.getSearchBar().getText() != null && !grid.getSearchBar().getText().isEmpty())) {   
 		        	processUserInput();        	
 		        } else {
 		        	appInfo[0].setText("You have not typed anything.");
@@ -73,8 +87,8 @@ public class CenterGridController {
 		});
 		
 		/**
-	     * setting an action for pressing Enter key while Submit button is active
-	     * Enter key is default active button set by submit.setDefaultButton(true);
+	     * Setting an action for pressing Enter key while Submit button is active.
+	     * Enter key is the default active button set by submit.setDefaultButton(true).
 		 */
 		grid.getSubmitButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -93,7 +107,7 @@ public class CenterGridController {
 		});
 		
 	    /**
-	     * setting an action for the Clear button (mouse)
+	     * Setting an action for the Clear button (mouse).
 	     */		
 		grid.getClearButton().setOnAction(new EventHandler<ActionEvent>() {		
 			 @Override
@@ -106,8 +120,8 @@ public class CenterGridController {
 		});
 		
 		/**
-	     * setting an action for pressing Enter key while Clear button is active
-	     * default active button is Enter key set by submit.setDefaultButton(true); 
+	     * Setting an action for pressing Enter key while Clear button is active.
+	     * Default active button is Enter key set by submit.setDefaultButton(true). 
 		 */
 		grid.getClearButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -124,9 +138,9 @@ public class CenterGridController {
 		});	
 			 	
 		/**
-	     * setting an action for pressing Change Button;
-	     * if no toggle is selected, pops up a new window with text: search and select a contact first else
-	     * if any toggle is selected, creates a new pop-up window (a form to modify or add new data)
+	     * Setting an action for pressing Change button:
+	     * if no toggle is selected, it pops up a new window with text: search and select a contact first else;
+	     * if any toggle is selected, it creates a new pop-up window (a form to modify or add new data).
 		 */
 		grid.getChangeButton().setOnAction(x -> {
 			if(obtained[0]==null) {
@@ -141,6 +155,9 @@ public class CenterGridController {
 			}
 		}); 
 		
+		/**
+	     * Setting an action for pressing Add button.
+		 */
 		grid.getAddButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {	
@@ -151,7 +168,7 @@ public class CenterGridController {
 		});	
 				
 		/**
-		 * deletes contact selected by user
+		 * Setting an action for pressing Delete button.
 		 */	
 		grid.getDeleteButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -172,24 +189,32 @@ public class CenterGridController {
 	}
 	
 	/**
-	 * Initializes searching process in DataManipulation component
+	 * Initializes searching process in DataOperations component.
 	 * and proceeds with the incoming results.
 	 */	
 	public void processUserInput() {
 		Set<Person> foundContacts = dataSearch.initSearch(grid.getSearchBar().getText());
-	   // removing "No contact found.." residing in DataSearch' Set<Person> foundContacts from extra search of phone number uniqueness
-		foundContacts.remove(new Person("No contact found.", ""));
+/*		// removing "No contact found.." residing in DataSearch' Set<Person> foundContacts from extra search of phone number uniqueness
+		foundContacts.remove(new Person("No contact found.", ""));*/
     	if(foundContacts.size()==0) {
     		appInfo[0].setText("Nothing was found.");
     	} else if(foundContacts.contains(new Person("Incorrect input (too many words).", "", -1))) {
     		appInfo[0].setText("Incorrect input (too many words).");
+    	} else if(foundContacts.contains(new Person("Phone number should be 9 digits long.", "", -1))) {
+    		appInfo[0].setText("Phone number should be 9 digits long and mustn't start with 0.");	
     	} else {
-    		if(foundContacts.size()>9) {
+    		if(foundContacts.size() > 10) {
     			initRadioButtonAgain();
-    			appInfo[0].setText("More than 9 contacts found. Showing first 9 contacts:");
+    			appInfo[0].setText("More than 10 contacts found. Showing first 10 contacts:");
     			int i = 1;
-    			for(Iterator<Person> it = foundContacts.iterator(); i< 10; it.hasNext()) {	
+    			for(Iterator<Person> it = foundContacts.iterator(); i < 11; it.hasNext()) {	
     				Person personFound = it.next();
+    				if(personFound.getFirstName().equals("No contact found.")) {
+    					i--;
+    					System.out.println("1");
+    					continue;
+    				}
+    				System.out.println("2");
     				appInfo[i].setText(personFound.toString());
     				radioButtonArray[i].setVisible(true);
     				radioButtonArray[i].setUserData(personFound); // binds selected toggle with 'object' in given Label field
@@ -201,6 +226,12 @@ public class CenterGridController {
     			int i = 1;
     			for(Iterator<Person> it = foundContacts.iterator(); it.hasNext();) {	
     				Person personFound = it.next();
+    				if(personFound.getFirstName().equals("No contact found.")) {
+    					i--;
+    					System.out.println("3");
+    					continue;
+    				}
+    				System.out.println("4");
     				appInfo[i].setText(personFound.toString());
     				radioButtonArray[i].setVisible(true);
     				radioButtonArray[i].setUserData(personFound); 
@@ -212,12 +243,11 @@ public class CenterGridController {
     	foundContacts.clear();    
 	}
 	
-	
 	/**
-	 * deselects all radiobutton toggles after "submit" button is pressed (important if it is pressed more than once);
-	 * clears 'Person[] obtained' member variable waiting for new user action 
-	 * (this task must be done in separate method, cannot be done in initController() - if user changes more than 1 contact, 
-	 * "old" info is saved in Person[] obtained and cannot be changed then)
+	 * Deselects all radiobutton toggles after Submit button is pressed (important if it is pressed more than once).
+	 * Clears 'Person[] obtained' member variable waiting for new user action. 
+	 * (This task must be done in separate method, cannot be done in initController() - if user changes more than 1 contact, 
+	 * "old" info is saved in Person[] obtained and cannot be changed then.).
 	 */	
 	public void initRadioButtonAgain() {
 		radioButtonGroup.selectToggle(null);
@@ -232,6 +262,10 @@ public class CenterGridController {
 		});
 	}
 	
+	/**
+	 * Clears app info displayed after taking new action by user.
+	 * @param appInfo app info to be cleared 
+	 */
 	public void clearAppInfo(Label[] appInfo) {
     	for(int i = 0; i < 11; i++) {
     		appInfo[i].setText("");	
@@ -239,6 +273,9 @@ public class CenterGridController {
     	}
 	}
 	
+	/**
+	 * Notifies user if there is no contact selected after pressing Change or Delete button.
+	 */
 	public void showContactNotSelectedAlertDialog() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApplication.getPrimaryStage().getX() + 250);
@@ -249,6 +286,9 @@ public class CenterGridController {
         alert.showAndWait();
 	}
 	
+	/**
+	 * Asks for the confirmation if user wants to delete chosen contact from the phone base.
+	 */
 	public boolean isToDeleteAlertDialog() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setX(StartApplication.getPrimaryStage().getX() + 250);

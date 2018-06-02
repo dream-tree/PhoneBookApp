@@ -1,6 +1,7 @@
 package com.marcin.phone.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.marcin.phone.repository.DataOperations;
@@ -20,26 +21,39 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import lombok.Getter;
 
+/**
+ * Class creates the main window for the application.
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Component
 public class MainView {
 	
-	private DataOperations operations;
 	private CenterGridView centerGrid;
 	private Label[] appInfo;
 	private RadioButton[] radioButtonArray;	
-	private HBox hbox;
 	private MenuView menuView;
+	@Getter
+	private HBox hbox;
+	@Getter
 	private Hyperlink[] options;
 	
+	@Value("${stage.title}")
+	private String mainStageTitle;
+	
 	@Autowired
-	public MainView(CenterGridView centerGrid, MenuView menuView, DataOperations operations) {
+	public MainView(CenterGridView centerGrid, MenuView menuView) {
 		this.centerGrid = centerGrid;
 		this.menuView = menuView;
-		this.operations = operations;
 	}
-	
-		
+			
+	/**
+	 * Initializes and creates the content of the application main window.
+	 * @param primaryStage main stage for the application
+	 */
 	public void initView(Stage primaryStage) {
 			
 		BorderPane root = new BorderPane();
@@ -50,9 +64,6 @@ public class MainView {
 		VBox vboxLeft = addLeftVBox();
 		root.setLeft(vboxLeft);
 		    
-		VBox vboxRight = addRightVBox();
-		root.setRight(vboxRight);
-		    
 		HBox hbox = centerGrid.getHBox();
 		root.setBottom(hbox);
 		    
@@ -60,13 +71,15 @@ public class MainView {
 		root.setCenter(centerGrid);
 		radioButtonArray = centerGrid.getRadioButtonArray();		    
 		    
-		primaryStage.setTitle("PhoneBook ver. 2.0");	
-		Scene scene = new Scene(root, 900, 630);
-	//	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setTitle(mainStageTitle);	
+		Scene scene = new Scene(root, 800, 660);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}	
 	
+	/**
+	 * Creates and adds the HBox at the bottom of the main window.
+	 */
 	public HBox addHBox() {
 		hbox = new HBox();
 	    hbox.setPadding(new Insets(50, 12, 30, 12));
@@ -75,29 +88,10 @@ public class MainView {
 	    hbox.setAlignment(Pos.CENTER);	    
 	    return hbox;
 	}
-		
-	public VBox addRightVBox() {
-	    VBox vBox = new VBox();
-	    vBox.setPadding(new Insets(30, 50, 20, 0));
-	    vBox.setSpacing(8);
-	      
-	    Text title = new Text("Extras:");
-	    title.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-	    vBox.getChildren().add(title);
-
-	    Hyperlink[] options = new Hyperlink[] {
-	        new Hyperlink("Extra"),
-	        new Hyperlink("Super"),
-	        new Hyperlink("Delicious"),
-	        new Hyperlink("Marvelous")};
-
-	    for (int i=0; i<4; i++) {
-	    	VBox.setMargin(options[i], new Insets(5, 0, 5, 0));
-	    	vBox.getChildren().add(options[i]);
-	    }
-	    return vBox;
-	}
 	
+	/**
+	 * Creates and adds the VBox on the left side of the main window.
+	 */
 	public VBox addLeftVBox() {
 		VBox vBox = new VBox();
 		vBox.setPadding(new Insets(30, 20, 20, 30));
@@ -125,17 +119,4 @@ public class MainView {
 	    }	
 		return vBox;
 	}
-	
-	
-	/**
-	 * @return the hbox
-	 */
-	public HBox getHbox() {
-		return hbox;
-	}
-	
-	public Hyperlink[] getOptions() {
-		return options;
-	}
-	
 }

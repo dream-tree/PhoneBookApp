@@ -3,6 +3,8 @@ package com.marcin.phone.views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.marcin.phone.data.Wallpaper;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -19,7 +22,11 @@ import javafx.scene.text.FontPosture;
 import lombok.Getter;
 
 /**
- * Class creates GridPane container used as a center part of BorderPane from MainView class.
+ * Class creates the GridPane container used as a center part of the BorderPane 
+ * constructing the application main window (MainView).
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
  */
 @Getter
 @Component
@@ -35,15 +42,18 @@ public class CenterGridView extends GridPane {
 	private RadioButton[] radioButtonArray;
 	private ToggleGroup radioButtonGroup;
 	private HBox hBox;
+	private Wallpaper wallpaper;
+	private ImageView topImageView;
 	
 	@Autowired
-	public CenterGridView() {
+	public CenterGridView(Wallpaper wallpaper) {
 		radioButtonGroup = new ToggleGroup();
 		radioButtonArray = new RadioButton[11];
 		appInfo = new Label[11];	
+		topImageView = wallpaper.setWallpaper();
 		
 		// defining the MainView bottom HBox
-		// moved here to better cooperation
+		// moved here for better cooperation
 		hBox = new HBox();
 		hBox.setPadding(new Insets(30, 12, 30, 12));
 		hBox.setSpacing(25);
@@ -72,55 +82,46 @@ public class CenterGridView extends GridPane {
 	    	appInfo[i].setMaxWidth(450); 
 	    	appInfo[i].setFont(Font.font("TAHOMA", FontPosture.ITALIC, 14)); 
 	    	GridPane.setConstraints(appInfo[i], 1, i+5);
-	    	GridPane.setColumnSpan(appInfo[i], 3);
-	    	this.getChildren().add(appInfo[i]); 	
+	    	GridPane.setColumnSpan(appInfo[i], 5);
+	    	this.getChildren().add(appInfo[i]); 
+	//    	this.setGridLinesVisible(true);
 	    }
 		createGrid();
 	}
 	
+	/**
+	 *  Creates the content of the application main window.
+	 */
 	public void createGrid() {		
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setAlignment(Pos.TOP_CENTER);
 		this.setVgap(5);
-		this.setHgap(7);
-//	    centerGrid.setGridLinesVisible(true);
-		Rectangle rect0 = new Rectangle(25.0, 100.0);
-	    Rectangle rect1 = new Rectangle(150.0, 100.0);
-	    Rectangle rect2 = new Rectangle(150.0, 100.0);
-	    Rectangle rect3 = new Rectangle(75.0, 100.0);
-	    Rectangle rect4 = new Rectangle(75.0, 100.0);
-	    rect0.setFill(Color.LIGHTGREY);
-	    rect1.setFill(Color.LIGHTGREY);
-	    rect2.setFill(Color.LIGHTGREY);
-	    rect3.setFill(Color.LIGHTGREY);
-	    rect4.setFill(Color.LIGHTGREY);
-	    GridPane.setConstraints(rect0, 0, 0);
-	    GridPane.setConstraints(rect1, 1, 0);
-	    GridPane.setConstraints(rect2, 2, 0);
-	    GridPane.setConstraints(rect3, 3, 0);
-	    GridPane.setConstraints(rect4, 4, 0);
-	    this.getChildren().addAll(rect0, rect1, rect2, rect3, rect4);
+		this.setHgap(5); 
+
+		// defining the top image
+		GridPane.setConstraints(topImageView, 0, 0, 5, 1);
+		this.getChildren().addAll(topImageView);
 	    
 	    // defining the searching bar text field
 	    searchBar = new TextField();
 	    searchBar.setPromptText("Enter your query..");
-	    searchBar.setPrefColumnCount(15);   // maximum number of characters it can display at one time - doesn't work?
-	    searchBar.getText();            // !!! important method: the text data entered by a user into the text fields can be obtained by the
-	    							    // getText method of the TextInput class.
+	    searchBar.setMinWidth(190);
+	    searchBar.getText();           
+	    							   
 	    searchBar.setAlignment(Pos.CENTER);
-	    GridPane.setConstraints(searchBar, 0, 1, 3, 1);    // used instance method add() before
+	    GridPane.setConstraints(searchBar, 0, 1, 3, 1);   
 	    this.getChildren().add(searchBar);
 	  
 	    // defining the Submit button
 	    submitButton = new Button("Submit");
-	    submitButton.setDefaultButton(true);     // activates chosen button for keyboard pressing (with setOnKeyPressed())
-	    submitButton.setMinWidth(75);
+	    submitButton.setDefaultButton(true);     
+	    submitButton.setMinWidth(85);
 	    GridPane.setConstraints(submitButton, 3, 1);
 	    this.getChildren().add(submitButton);
 	   
 	    // defining the Clear button
 	    clearButton = new Button("Clear");
-	    clearButton.setMinWidth(75);
+	    clearButton.setMinWidth(85);
 	    GridPane.setConstraints(clearButton, 4, 1);    
 	    this.getChildren().add(clearButton);
 
@@ -136,77 +137,4 @@ public class CenterGridView extends GridPane {
 	    GridPane.setColumnSpan(searchInfo1, 3);
 	    this.getChildren().add(searchInfo1);
 	}
-
-/*	*//**
-	 * @return the appInfo
-	 *//*
-	public Label[] getAppInfo() {
-		return appInfo;
-	}
-
-
-	*//**
-	 * @return the submit
-	 *//*
-	public Button getSubmit() {
-		return submitButton;
-	}
-
-	*//**
-	 * @return the clear
-	 *//*
-	public Button getClear() {
-		return clearButton;
-	}
-
-	*//**
-	 * @return the searchBar
-	 *//*
-	public TextField getSearchBar() {
-		return searchBar;
-	}
-
-	*//**
-	 * @return the radioButtonArray
-	 *//*
-	public RadioButton[] getRadioButtonArray() {
-		return radioButtonArray;
-	}
-
-	*//**
-	 * @return the radioButtonGroup
-	 *//*
-	public ToggleGroup getRadioButtonGroup() {
-		return radioButtonGroup;
-	}
-
-	*//**
-	 * @return the changeButton
-	 *//*
-	public Button getChangeButton() {
-		return changeButton;
-	}
-
-	*//**
-	 * @return the addButton
-	 *//*
-	public Button getAddButton() {
-		return addButton;
-	}
-
-	*//**
-	 * @return the deleteButton
-	 *//*
-	public Button getDeleteButton() {
-		return deleteButton;
-	}
-
-	*//**
-	 * @return the downHBox
-	 *//*
-	public HBox getHBox() {
-		return hBox;
-	}*/
-	
-	
 }

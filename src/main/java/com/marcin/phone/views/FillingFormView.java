@@ -20,6 +20,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Getter;
 
+/**
+ * Class creates additional application window - filling form,
+ * allowing the user to enter new or modified contact data.
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Getter
 @Component
 public class FillingFormView {
@@ -43,11 +50,10 @@ public class FillingFormView {
     }
        
     /**
-     * Creates new pop-up window to enable modifying or adding new data
+     * Creates a new pop-up window to enable modifying or adding new contact data.
      * @param chosenContactNumber phone number serving as a bridge between 'old' and 'new' data
      * @return new grid pane (form to modify or add new data)
-     */
-    
+     */   
 	public GridPane createGrid(Person chosenContact) { 
 		this.chosenContact = chosenContact;
 		GridPane grid = new GridPane();
@@ -63,6 +69,8 @@ public class FillingFormView {
 		numberLabel = new Label("Phone Number:");
 		firstText = new TextField(chosenContact.getFirstName());
 		lastText = new TextField(chosenContact.getLastName());
+		// checking out if the Add button was pressed, if so no phone number is shown in the text field;
+		// first and last name are empty strings then so the text fields for them contains no text
 		if(chosenContact.getNumber() == -1) {
 			numberText = new TextField("");
 		} else {
@@ -89,7 +97,7 @@ public class FillingFormView {
         Scene secondScene = new Scene(grid);
       	 
         newWindow = new Stage();
-        newWindow.setTitle("Phone Base Update Form");
+        newWindow.setTitle("Phone Base Filling Form");
         newWindow.setScene(secondScene);
 
         // specifies the modality for new window
@@ -107,6 +115,10 @@ public class FillingFormView {
 		return grid;
 	}
 	
+	/**
+	 * Notifies user that the entered phone number exists already in the phone base
+	 * and can't be used again.
+	 */
 	public void showDuplicateNumberAlertDialog() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApplication.getPrimaryStage().getX() + 250);

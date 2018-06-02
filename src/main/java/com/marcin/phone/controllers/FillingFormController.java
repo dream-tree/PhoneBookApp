@@ -11,6 +11,16 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Controller for the application Filling Form window, where user can add a new or modify an existing contact.
+ * Mechanism does not allow to save more than one contact with the same phone number.
+ * In this way the phone number is the kind of "unique id" in the phone base.
+ * There are no addition restrictions on first and last name i.j., there might be an arbitrary number of contacts
+ * whose first and last names are the same.
+ * 
+ * @author dream-tree
+ * @version 3.00, January-May 2018
+ */
 @Controller
 public class FillingFormController {
 	
@@ -23,7 +33,15 @@ public class FillingFormController {
 		this.validator = validator;
 	}
 
+	/**
+	 * Initializes the controller for the application main window i.e.,
+	 * controller for Save button and
+	 * controller for Cancel button.
+	 */
 	public void initController() {		
+		/**
+		 * Setting an action for the Save button (mouse).
+		 */
 		formView.getSaveButton().setOnAction(new EventHandler<ActionEvent>() {	
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -33,13 +51,17 @@ public class FillingFormController {
 				// gets existing phone number if changeButton was pressed or -1 if addButton was pressed
 				int userChoice = formView.getChosenContact().getNumber();
 				if(isFormFilled()) {
-					validator.checkAndSaveInput(userChoice);				
+					validator.proceedUserInput(userChoice);				
 				} else {
 					formView.getFormAppInfo().setText("You haven't fill all fields.");
 				}			
 			}
 		});
 		
+		/**
+	     * Setting an action for pressing Enter key while Save button is active.
+	     * Enter key is the default active button set by submit.setDefaultButton(true).
+		 */
 		formView.getSaveButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(final KeyEvent keyEvent) {
@@ -50,7 +72,7 @@ public class FillingFormController {
 					// gets existing phone number if changeButton was pressed or -1 if addButton was pressed
 					int userChoice = formView.getChosenContact().getNumber();
 					if(isFormFilled()) {
-						validator.checkAndSaveInput(userChoice);
+						validator.proceedUserInput(userChoice);
 					} else {
 						formView.getFormAppInfo().setText("You haven't fill all fields.");
 					}
@@ -59,6 +81,9 @@ public class FillingFormController {
 			}
 		});
 
+		/**
+		 * Setting an action for the Cancel button (mouse).
+		 */
 		formView.getCancelButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg) {
@@ -66,6 +91,10 @@ public class FillingFormController {
 			}
 		});
 		
+		/**
+	     * Setting an action for pressing Enter key while Cancel button is active.
+	     * Enter key is the default active button set by submit.setDefaultButton(true).
+		 */
 		formView.getCancelButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(final KeyEvent event) {
@@ -75,7 +104,7 @@ public class FillingFormController {
 	}
 	
 	/**
-	 * checking if all text fields are filled by user
+	 * Checks if all text fields are filled by the user.
 	 * @return true if all fields are filled by user
 	 */	
 	public boolean isFormFilled() {
