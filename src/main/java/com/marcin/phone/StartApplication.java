@@ -42,9 +42,10 @@ public class StartApplication extends Application {
 			menuController.initMenuController();
 			LeftBoxMenuController leftBoxMenuController = context.getBean(LeftBoxMenuController.class);
 			leftBoxMenuController.initController();
-				
-		}	catch (Exception e) {
-				e.printStackTrace();
+			context.close();
+		}	
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 		

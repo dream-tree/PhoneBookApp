@@ -3,6 +3,13 @@
   <groupId>com.marcin</groupId>
   <artifactId>phoneBookJavaFX_ver.3</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+  
   <dependencies>
   	<dependency>
   		<groupId>org.springframework</groupId>
@@ -41,6 +48,11 @@
    		 <version>4.1</version>
 	</dependency>
 
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.1.0</version>
+	</dependency>
 
   </dependencies>
 </project>

@@ -194,8 +194,6 @@ public class CenterGridController {
 	 */	
 	public void processUserInput() {
 		Set<Person> foundContacts = dataSearch.initSearch(grid.getSearchBar().getText());
-/*		// removing "No contact found.." residing in DataSearch' Set<Person> foundContacts from extra search of phone number uniqueness
-		foundContacts.remove(new Person("No contact found.", ""));*/
     	if(foundContacts.size()==0) {
     		appInfo[0].setText("Nothing was found.");
     	} else if(foundContacts.contains(new Person("Incorrect input (too many words).", "", -1))) {

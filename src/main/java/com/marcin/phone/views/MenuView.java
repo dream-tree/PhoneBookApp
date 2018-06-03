@@ -8,7 +8,6 @@ import com.marcin.phone.StartApplication;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -50,6 +49,7 @@ public class MenuView {
 	
 	/**
 	 * Creates MenuBar for the application main view.
+	 * @return menu bar in the main window of the application
 	 */
 	public MenuBar initMenuBar() {
 		menuBar = new MenuBar();

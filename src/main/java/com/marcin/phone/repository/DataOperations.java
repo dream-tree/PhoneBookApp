@@ -25,7 +25,7 @@ public class DataOperations {
 	private List<Person> list;
 	
 	@Autowired
-	public DataOperations(@Qualifier(value="txt") PhoneBaseDAO base) {
+	public DataOperations(@Qualifier(value="csv") PhoneBaseDAO base) {
 		this.base = base;
 		list = base.getPersonList();
 	}	

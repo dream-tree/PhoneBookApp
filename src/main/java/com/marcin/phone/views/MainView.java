@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.marcin.phone.repository.DataOperations;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -79,6 +77,7 @@ public class MainView {
 	
 	/**
 	 * Creates and adds the HBox at the bottom of the main window.
+	 * @return Hbox container laying at the bottom of the application
 	 */
 	public HBox addHBox() {
 		hbox = new HBox();
@@ -91,6 +90,7 @@ public class MainView {
 	
 	/**
 	 * Creates and adds the VBox on the left side of the main window.
+	 * @return Vbox container laying at the left side of the application
 	 */
 	public VBox addLeftVBox() {
 		VBox vBox = new VBox();

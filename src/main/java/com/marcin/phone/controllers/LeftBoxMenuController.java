@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 
 import com.marcin.phone.data.DataSearch;
 import com.marcin.phone.model.Person;
-import com.marcin.phone.repository.DataOperations;
 import com.marcin.phone.views.CenterGridView;
 import com.marcin.phone.views.MainView;
 
@@ -131,13 +130,9 @@ public class LeftBoxMenuController {
     		appInfo[0].setText("Showing up to 10 random contacts:");
     		j++;
     	}     	
-    //	Random rand = new Random();
-    	for(Person x : converted) {
-    	//	int index = rand.nextInt(converted.length);
+    	for(int k = j; k < converted.length && k < 11; k++) {
     		int index = (int) (Math.random()*converted.length-1);
-    		appInfo[j].setText(converted[index].toString());
-    		j++;
-    		if(j > 10) break;
+    		appInfo[k].setText(converted[index].toString());
     	}	
     	dataSearch.getFoundContacts().clear();
 	}

@@ -1,6 +1,5 @@
 package com.marcin.phone.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.marcin.phone.model.Person;

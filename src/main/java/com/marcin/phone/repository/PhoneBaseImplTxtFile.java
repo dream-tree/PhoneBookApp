@@ -84,12 +84,6 @@ public class PhoneBaseImplTxtFile implements PhoneBaseDAO {
 	@Override
 	public void saveUpdatedEntries(List<Person> updatedList) {
 		List<String> updatedTxtList = new ArrayList<>();
-		// TODO: use StringBuilder
-		// converting List<Person> into String entries for the .txt file
-/*		for (Person person : updatedList) {
-			updatedTxtList.add(person.getFirstName() + " " + person.getLastName() + " " + " " 
-			+ String.valueOf(person.getNumber()));			
-		}*/
 		for (Person person : updatedList) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(person.getFirstName()).append(" ");

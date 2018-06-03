@@ -1,14 +1,11 @@
 package com.marcin.phone.repository;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.marcin.phone.model.Person;
 import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
 
 /**
  * Class implements interface for reading from a persistent store all available contacts by loading data from a .csv file.
@@ -68,7 +64,7 @@ public class PhoneBaseImplCsvFile implements PhoneBaseDAO {
 	 */
 	@Override
 	public void saveUpdatedEntries(List<Person> updatedList) {
-		CSVWriter csvOutput = null;
+/*		CSVWriter csvOutput = null;
 		try {
 			csvOutput = new CSVWriter(new FileWriter(path.toString(), true),
 			        CSVWriter.DEFAULT_SEPARATOR,
@@ -83,9 +79,9 @@ public class PhoneBaseImplCsvFile implements PhoneBaseDAO {
 			csvOutput.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
-/*		List<String> updatedCsvList = new ArrayList<>();
+		List<String> updatedCsvList = new ArrayList<>();
 		// converting List<Person> into String entries for the .csv file
 		for (Person person : updatedList) {
 			StringBuilder sb = new StringBuilder();
@@ -99,7 +95,7 @@ public class PhoneBaseImplCsvFile implements PhoneBaseDAO {
 			Files.write(path, updatedCsvList);		
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}		
 	
 	/** 
