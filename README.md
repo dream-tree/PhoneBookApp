@@ -12,7 +12,7 @@ PhoneBook project is made with JavaFX technology and uses "plain" Java code for 
 
 It also uses some basic Spring Framework features (Spring Core) i.e, dependency injection (with annotation-based configuration), Lombok project features and opencsv parser library for Java.
 
-Project #004.
+Project #003.
 
 ----
 
@@ -33,4 +33,4 @@ This project is the best example for me, how NOT start developing an application
 ----
 
 Take a look at these sample screenshots of this app:
-<a href="https://drive.google.com/open?id=1A-9bjH55MHVsyTCw4CNaUhznBNXlunLN">Screenshots of PhoneBook app</a>
+<a target="_blank" href="https://drive.google.com/open?id=1A-9bjH55MHVsyTCw4CNaUhznBNXlunLN">Screenshots of PhoneBook app</a>
