@@ -28,9 +28,9 @@ import lombok.Setter;
 @Setter
 public class Person {
 
-	String firstName;
-	String lastName;
-	int number;
+	private String firstName;
+	private String lastName;
+	private int number;
 
 	/**
 	 * Deafult Person constructor used by org.springframework.beans.factory.
