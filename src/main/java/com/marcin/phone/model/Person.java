@@ -6,17 +6,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Person is the entity used to create contact entries in the phone base (database).
- * Each "valid" Person object has the first name, the last name and the phone number.
- * Valid object means an object ready to be saved, deleted or updated in the phone base (database).
- * There are also "invalid" Person objects consisting of first and last name only.
- * These objects are constructed by the application logic only to note exceptional behaviour
- * if no contacts are found by the search engine.
- * They might be constructed in 3 classes as listed below: 
+ * Person is the entity used to create contact entries in the phone base
+ * (database). Each "valid" Person object has the first name, the last name and
+ * the phone number. Valid object means an object ready to be saved, deleted or
+ * updated in the phone base (database). There are also "invalid" Person objects
+ * consisting of first and last name only. These objects are constructed by the
+ * application logic only to note exceptional behaviour if no contacts are found
+ * by the search engine. They might be constructed in 3 classes as listed below:
  * <ul>
- *  <li>{@link com.marcin.phone.data.InputValidator#isPhoneNumberUnique(int)}</li>
- *  <li>{@link com.marcin.phone.controllers.CenterGridController#processUserInput()}</li>
- *  <li>{@link com.marcin.phone.data.DataSearch#searchByNumber(int)}</li>
+ * <li>{@link com.marcin.phone.data.InputValidator#isPhoneNumberUnique(int)}</li>
+ * <li>{@link com.marcin.phone.controllers.CenterGridController#processUserInput()}</li>
+ * <li>{@link com.marcin.phone.data.DataSearch#searchByNumber(int)}</li>
  * </ul>
  * Invalid objects cannot be saved to the phone base (database).
  * 
@@ -35,14 +35,18 @@ public class Person {
 	/**
 	 * Deafult Person constructor used by org.springframework.beans.factory.
 	 */
-	public Person() {		
+	public Person() {
 	}
-		
+
 	/**
 	 * Constructs a "valid" Person instance as described in {@link Person}.
-	 * @param firstName first name of phone base contact (person)
-	 * @param lastName last name of phone base contact (person)
-	 * @param number phone number of phone base contact (person)
+	 * 
+	 * @param firstName
+	 *            first name of phone base contact (person)
+	 * @param lastName
+	 *            last name of phone base contact (person)
+	 * @param number
+	 *            phone number of phone base contact (person)
 	 */
 	public Person(String firstName, String lastName, int number) {
 		super();
@@ -50,11 +54,14 @@ public class Person {
 		this.lastName = lastName;
 		this.number = number;
 	}
-	
+
 	/**
 	 * Constructs an "invalid" Person instance as described in {@link Person}.
-	 * @param firstName first name of phone base contact (person)
-	 * @param lastName last name of phone base contact (person)
+	 * 
+	 * @param firstName
+	 *            first name of phone base contact (person)
+	 * @param lastName
+	 *            last name of phone base contact (person)
 	 */
 	public Person(String firstName, String lastName) {
 		super();
@@ -62,16 +69,21 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		// %,d: Requires the output to include the locale-specific group separators (Poland: xxx xxx xxx).
+		// %,d: Requires the output to include the locale-specific group separators
+		// (Poland: xxx xxx xxx).
 		return String.format("Phone number:  %,d  of %s %s", number, firstName, lastName);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -84,7 +96,9 @@ public class Person {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

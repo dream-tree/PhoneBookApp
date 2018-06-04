@@ -29,67 +29,71 @@ import lombok.Getter;
  */
 @Component
 public class MainView {
-	
+
 	private CenterGridView centerGrid;
 	private Label[] appInfo;
-	private RadioButton[] radioButtonArray;	
+	private RadioButton[] radioButtonArray;
 	private MenuView menuView;
 	@Getter
 	private HBox hbox;
 	@Getter
 	private Hyperlink[] options;
-	
+
 	@Value("${stage.title}")
 	private String mainStageTitle;
-	
+
 	@Autowired
 	public MainView(CenterGridView centerGrid, MenuView menuView) {
 		this.centerGrid = centerGrid;
 		this.menuView = menuView;
 	}
-			
+
 	/**
 	 * Initializes and creates the content of the application main window.
-	 * @param primaryStage main stage for the application
+	 * 
+	 * @param primaryStage
+	 *            main stage for the application
 	 */
 	public void initView(Stage primaryStage) {
-			
+
 		BorderPane root = new BorderPane();
-			    
+
 		MenuBar menuBar = menuView.initMenuBar();
 		root.setTop(menuBar);
-		    		   		    
+
 		VBox vboxLeft = addLeftVBox();
 		root.setLeft(vboxLeft);
-		    
+
 		HBox hbox = centerGrid.getHBox();
 		root.setBottom(hbox);
-		    
+
 		appInfo = centerGrid.getAppInfo();
 		root.setCenter(centerGrid);
-		radioButtonArray = centerGrid.getRadioButtonArray();		    
-		    
-		primaryStage.setTitle(mainStageTitle);	
+		radioButtonArray = centerGrid.getRadioButtonArray();
+
+		primaryStage.setTitle(mainStageTitle);
 		Scene scene = new Scene(root, 800, 660);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	}	
-	
+	}
+
 	/**
 	 * Creates and adds the HBox at the bottom of the main window.
+	 * 
 	 * @return Hbox container laying at the bottom of the application
 	 */
 	public HBox addHBox() {
 		hbox = new HBox();
-	    hbox.setPadding(new Insets(50, 12, 30, 12));
-	    hbox.setSpacing(25);
-	    hbox.setStyle("-fx-background-color: #336699;");
-	    hbox.setAlignment(Pos.CENTER);	    
-	    return hbox;
+		hbox.setPadding(new Insets(50, 12, 30, 12));
+		hbox.setSpacing(25);
+		hbox.setStyle("-fx-background-color: #336699;");
+		hbox.setAlignment(Pos.CENTER);
+		return hbox;
 	}
-	
+
 	/**
 	 * Creates and adds the VBox on the left side of the main window.
+	 * 
 	 * @return Vbox container laying at the left side of the application
 	 */
 	public VBox addLeftVBox() {
@@ -107,16 +111,16 @@ public class MainView {
 		Hyperlink link2 = new Hyperlink("Sorted by last name");
 		Hyperlink link3 = new Hyperlink("Sorted by phone number");
 		Hyperlink link4 = new Hyperlink("Random contacts");
-		
-		options = new Hyperlink[] {link1, link2, link3, link4};
-		
-		for(int i = 0; i < 4; i++) {
+
+		options = new Hyperlink[] { link1, link2, link3, link4 };
+
+		for (int i = 0; i < 4; i++) {
 			VBox.setMargin(options[i], new Insets(5, 0, 5, 0));
 			options[i].setWrapText(true);
 			options[i].setTextAlignment(TextAlignment.CENTER);
-			options[i].setPrefWidth(110);	
+			options[i].setPrefWidth(110);
 			vBox.getChildren().add(options[i]);
-	    }	
+		}
 		return vBox;
 	}
 }

@@ -27,50 +27,50 @@ import com.marcin.phone.model.Person;
  * @version 3.00, January-May 2018
  */
 @Repository
-@Qualifier(value="txt")
+@Qualifier(value = "txt")
 public class PhoneBaseImplTxtFile implements PhoneBaseDAO {
-	
+
 	private static List<Person> personList;
-	
+
 	public PhoneBaseImplTxtFile() {
 		personList = readEntries();
 	}
-	
-	/** 
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Person> readEntries() {
 		List<String> txtList = new ArrayList<>();
-		// reading all contacts from a .txt file 
+		// reading all contacts from a .txt file
 		Path path = FileSystems.getDefault().getPath("src/main/resources/phonebookList.txt");
 		try {
 			txtList = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}
 
 		String firstName = "";
 		String lastName = "";
-		int number = 0;		
+		int number = 0;
 		Scanner in = null;
-		
+
 		// converting all String entries into List<Person> objects
 		List<Person> list = new ArrayList<>();
-			for(int i = 0; i < txtList.size(); i++) {
-				String oneLineToFrags = txtList.get(i);
-				in = new Scanner(oneLineToFrags);			
-				firstName = in.next();
-				lastName = in.next();
-				number = Integer.parseInt(in.next());
-				
-				list.add(new Person(firstName, lastName, number)); 
-				in.close();
-			}
-		return list;		
+		for (int i = 0; i < txtList.size(); i++) {
+			String oneLineToFrags = txtList.get(i);
+			in = new Scanner(oneLineToFrags);
+			firstName = in.next();
+			lastName = in.next();
+			number = Integer.parseInt(in.next());
+
+			list.add(new Person(firstName, lastName, number));
+			in.close();
+		}
+		return list;
 	}
-	
-	/** 
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -78,7 +78,7 @@ public class PhoneBaseImplTxtFile implements PhoneBaseDAO {
 		return personList;
 	}
 
-	/** 
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -89,14 +89,14 @@ public class PhoneBaseImplTxtFile implements PhoneBaseDAO {
 			sb.append(person.getFirstName()).append(" ");
 			sb.append(person.getLastName()).append("  ");
 			sb.append(String.valueOf(person.getNumber()));
-			updatedTxtList.add(sb.toString());			
+			updatedTxtList.add(sb.toString());
 		}
-		
+
 		Path path = FileSystems.getDefault().getPath("src/main/resources/phonebookList.txt");
 		try {
-			Files.write(path, updatedTxtList);		
+			Files.write(path, updatedTxtList);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 }

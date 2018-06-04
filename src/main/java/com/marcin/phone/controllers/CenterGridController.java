@@ -131,7 +131,6 @@ public class CenterGridController {
 					keyEvent.consume();
 				}
 			}
-
 		});
 
 		/**
@@ -180,8 +179,6 @@ public class CenterGridController {
 						clearAppInfo(appInfo);
 						appInfo[0].setText("Contact was deleted.");
 					}
-					;
-
 				}
 			}
 		});

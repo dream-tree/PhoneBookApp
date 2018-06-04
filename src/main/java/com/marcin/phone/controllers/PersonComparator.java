@@ -16,13 +16,13 @@ import com.marcin.phone.model.Person;
 public class PersonComparator implements Comparator<Person> {
 	@Override
 	public int compare(Person p1, Person p2) {
-		return p1.getNumber()-p2.getNumber();
+		return p1.getNumber() - p2.getNumber();
 	}
 }
-	
+
 /**
- * Person comparator. 
- * Compares Person objects by first name in first place; if result is 0, it compares objects by the last name.
+ * Person comparator. Compares Person objects by first name in first place; if
+ * result is 0, it compares objects by the last name.
  * 
  * @author dream-tree
  * @version 3.00, January-May 2018
@@ -32,17 +32,17 @@ class FirstNamePersonComparator implements Comparator<Person> {
 	@Override
 	public int compare(Person p1, Person p2) {
 		int firstNameComparision = p1.getFirstName().compareTo(p2.getFirstName());
-		if(firstNameComparision != 0) {
+		if (firstNameComparision != 0) {
 			return firstNameComparision;
 		} else {
 			return p1.getLastName().compareTo(p2.getLastName());
 		}
-	}	
-}	
+	}
+}
 
 /**
- * Person comparator. 
- * Compares Person objects by last name in first place; if result is 0, it compares objects by the first name.
+ * Person comparator. Compares Person objects by last name in first place; if
+ * result is 0, it compares objects by the first name.
  * 
  * @author dream-tree
  * @version 3.00, January-May 2018
@@ -52,10 +52,10 @@ class LastNamePersonComparator implements Comparator<Person> {
 	@Override
 	public int compare(Person p1, Person p2) {
 		int lastNameComparision = p1.getLastName().compareTo(p2.getLastName());
-		if(lastNameComparision != 0) {
+		if (lastNameComparision != 0) {
 			return lastNameComparision;
 		} else {
 			return p1.getFirstName().compareTo(p2.getFirstName());
 		}
-	}	
-}	
+	}
+}
