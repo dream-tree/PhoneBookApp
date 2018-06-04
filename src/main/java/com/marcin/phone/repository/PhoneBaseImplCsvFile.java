@@ -15,7 +15,8 @@ import com.marcin.phone.model.Person;
 import com.opencsv.CSVReader;
 
 /**
- * Class implements interface for reading from a persistent store all available contacts by loading data from a .csv file.
+ * Class implements interface for reading from a persistent store all available contacts
+ * by loading data from a .csv file.
  * It is also responsible for saving all available contacts to a .csv file again.
  * All loaded contacts are stored in a List collection (called phone base).
  * This List collection is retrieved by {@see DataOpertions} class for proper action chosen by user i.e.,
@@ -65,14 +66,23 @@ public class PhoneBaseImplCsvFile implements PhoneBaseDAO {
 	@Override
 	public void saveUpdatedEntries(List<Person> updatedList) {
 		/*
-		 * CSVWriter csvOutput = null; try { csvOutput = new CSVWriter(new
-		 * FileWriter(path.toString(), true), CSVWriter.DEFAULT_SEPARATOR,
-		 * CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-		 * CSVWriter.DEFAULT_LINE_END); for(Person person : updatedList) {
-		 * System.out.println(person); csvOutput.writeNext(new
-		 * String[]{person.getFirstName(), person.getLastName(),
-		 * String.valueOf(person.getNumber())}); } csvOutput.close(); } catch
-		 * (IOException e) { e.printStackTrace(); }
+		 * CSVWriter csvOutput = null; 
+		 * try { 
+		 * 		csvOutput = new CSVWriter(new FileWriter(path.toString(), true), 
+		 * 							CSVWriter.DEFAULT_SEPARATOR,
+		 * 							CSVWriter.NO_QUOTE_CHARACTER,
+		 * 							CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+		 * 							CSVWriter.DEFAULT_LINE_END); 
+		 * 		for(Person person : updatedList) {
+		 * 			csvOutput.writeNext(new String[]{
+		 * 				person.getFirstName(), 
+		 * 				person.getLastName(), 
+		 * 				String.valueOf(person.getNumber())
+		 * 			}); 
+		 * 		} 
+		 * 		csvOutput.close(); 
+		 * } catch (IOException e) { 
+		 * 		e.printStackTrace(); }
 		 */
 
 		List<String> updatedCsvList = new ArrayList<>();

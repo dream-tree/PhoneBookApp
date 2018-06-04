@@ -13,8 +13,7 @@ import com.marcin.phone.model.Person;
  */
 public interface PhoneBaseDAO {
 	/**
-	 * Loads all contacts from a persistent store, such as a .txt file or a
-	 * database.
+	 * Loads all contacts from a persistent store, such as a .txt file or a database.
 	 * 
 	 * @return list of all loaded contacts
 	 */

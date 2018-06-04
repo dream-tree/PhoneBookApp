@@ -82,7 +82,6 @@ public class CenterGridView extends GridPane {
 			GridPane.setConstraints(appInfo[i], 1, i + 5);
 			GridPane.setColumnSpan(appInfo[i], 5);
 			this.getChildren().add(appInfo[i]);
-			// this.setGridLinesVisible(true);
 		}
 		createGrid();
 	}

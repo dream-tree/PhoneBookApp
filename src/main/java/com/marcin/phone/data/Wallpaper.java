@@ -11,8 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Class responsible for loading an image placed over the search bar in the
- * application main window.
+ * Class responsible for loading an image placed over the search bar 
+ * in the application main window.
  * 
  * @author dream-tree
  * @version 3.00, January-May 2018

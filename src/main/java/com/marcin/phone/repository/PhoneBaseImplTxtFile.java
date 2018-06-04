@@ -15,7 +15,8 @@ import org.springframework.stereotype.Repository;
 import com.marcin.phone.model.Person;
 
 /**
- * Class implements interface for reading from a persistent store all available contacts by loading data from a .txt file.
+ * Class implements interface for reading from a persistent store all available contacts 
+ * by loading data from a .txt file.
  * It is also responsible for saving all available contacts to a .txt file again.
  * All loaded contacts are stored in a List collection (called phone base).
  * This List collection is retrieved by {@see DataOpertions} class for proper action chosen by user i.e.,

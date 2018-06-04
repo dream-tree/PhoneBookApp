@@ -99,9 +99,11 @@ public class LeftBoxMenuController {
 		clearAppInfo(appInfo);
 		Set<Person> allContacts = dataSearch.showAllBase();
 
-		Person[] sortedContacts = allContacts.stream()
+		Person[] sortedContacts = allContacts
+				.stream()
 				.sorted(sortingIndentifier.equals("firstNameOrder") ? firstNamePersonComparator
-						: sortingIndentifier.equals("lastNameOrder") ? lastNamePersonComparator : phonePersonComparator)
+						: sortingIndentifier.equals("lastNameOrder") ? lastNamePersonComparator
+						: phonePersonComparator)
 				.toArray(Person[]::new);
 
 		int i = 0;
@@ -127,7 +129,9 @@ public class LeftBoxMenuController {
 		clearAppInfo(appInfo);
 		Set<Person> allContacts = dataSearch.showAllBase();
 
-		Person[] converted = allContacts.stream().toArray(Person[]::new);
+		Person[] converted = allContacts
+				.stream()
+				.toArray(Person[]::new);
 		int j = 0;
 		if (converted.length > 10) {
 			appInfo[0].setText("Showing up to 10 random contacts:");

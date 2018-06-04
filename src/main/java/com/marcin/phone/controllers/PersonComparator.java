@@ -21,8 +21,8 @@ public class PersonComparator implements Comparator<Person> {
 }
 
 /**
- * Person comparator. Compares Person objects by first name in first place; if
- * result is 0, it compares objects by the last name.
+ * Person comparator. Compares Person objects by first name in first place;
+ * if result is 0, it compares objects by the last name.
  * 
  * @author dream-tree
  * @version 3.00, January-May 2018
@@ -41,8 +41,8 @@ class FirstNamePersonComparator implements Comparator<Person> {
 }
 
 /**
- * Person comparator. Compares Person objects by last name in first place; if
- * result is 0, it compares objects by the first name.
+ * Person comparator. Compares Person objects by last name in first place;
+ * if result is 0, it compares objects by the first name.
  * 
  * @author dream-tree
  * @version 3.00, January-May 2018

@@ -60,8 +60,8 @@ public class FillingFormController {
 		});
 
 		/**
-		 * Setting an action for pressing Enter key while Save button is active. Enter
-		 * key is the default active button set by submit.setDefaultButton(true).
+		 * Setting an action for pressing Enter key while Save button is active. 
+		 * Enter key is the default active button set by submit.setDefaultButton(true).
 		 */
 		formView.getSaveButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -94,8 +94,8 @@ public class FillingFormController {
 		});
 
 		/**
-		 * Setting an action for pressing Enter key while Cancel button is active. Enter
-		 * key is the default active button set by submit.setDefaultButton(true).
+		 * Setting an action for pressing Enter key while Cancel button is active.
+		 * Enter key is the default active button set by submit.setDefaultButton(true).
 		 */
 		formView.getCancelButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override

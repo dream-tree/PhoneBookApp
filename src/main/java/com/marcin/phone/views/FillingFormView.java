@@ -71,10 +71,8 @@ public class FillingFormView {
 		numberLabel = new Label("Phone Number:");
 		firstText = new TextField(chosenContact.getFirstName());
 		lastText = new TextField(chosenContact.getLastName());
-		// checking out if the Add button was pressed, if so no phone number is shown in
-		// the text field;
-		// first and last name are empty strings, so the text fields for them contain no
-		// text
+		// checking out if the Add button was pressed, if so no phone number is shown in the text field;
+		// first and last name are empty strings, so the text fields for them contain no text
 		if (chosenContact.getNumber() == -1) {
 			numberText = new TextField("");
 		} else {

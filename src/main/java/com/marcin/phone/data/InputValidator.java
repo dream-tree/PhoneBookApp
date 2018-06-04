@@ -46,10 +46,8 @@ public class InputValidator {
 	 * </ul>
 	 * For the text fields:
 	 * <ul>
-	 * <li>it examines the number of single tokens entered by user (must not exceed
-	 * 2),</li>
-	 * <li>it checks out if user typed only white spaces in the text field what is
-	 * forbidden.</li>
+	 * <li>it examines the number of single tokens entered by user (must not exceed 2),</li>
+	 * <li>it checks out if user typed only white spaces in the text field what is forbidden.</li>
 	 * </ul>
 	 * 
 	 * @param firstName
@@ -91,8 +89,8 @@ public class InputValidator {
 
 	/**
 	 * Gets the result of the initial user input check from
-	 * {@link #checkInput(String, String, String)} and returns specialized info if
-	 * input is not correct, or calls appropriate method for updating phone base:
+	 * {@link #checkInput(String, String, String)} and returns specialized info 
+	 * if input is not correct, or calls appropriate method for updating phone base:
 	 * either for adding or modifying existing contact. Adding new contact requires
 	 * additional validation operation - typed phone number must be unique in the
 	 * phone base. If it is not, contact adding process is rejected.
@@ -136,8 +134,8 @@ public class InputValidator {
 
 	/**
 	 * Performs additional validation operation if user wants to add a new contact
-	 * to the phone base. Typed phone number must be unique in the phone base. If it
-	 * is not, contact adding process is rejected.
+	 * to the phone base. Typed phone number must be unique in the phone base. 
+	 * If it is not, contact adding process is rejected.
 	 * 
 	 * @param userChoice
 	 *            flag pointing out if user wants to add or to change existing

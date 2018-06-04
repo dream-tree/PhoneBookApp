@@ -14,9 +14,9 @@ import lombok.Getter;
 
 /**
  * Class implementing the search mechanism for contacts saved in the phone base.
- * It is utilized in the search bar in the application main window. This
- * mechanism allows to find a contact by a phone number, by a single word (first
- * or last name), or by 2 separate words i.j., by the first and the last name
+ * It is utilized in the search bar in the application main window. 
+ * This mechanism allows to find a contact by a phone number, by a single word 
+ * (first or last name), or by 2 separate words i.j., by the first and the last name
  * simultaneously. Other combinations are not allowed and are rejected by the
  * search mechanism.
  * 
@@ -39,9 +39,8 @@ public class DataSearch {
 	}
 
 	/**
-	 * Initial (zero-level) point for searching contacts in the phone base. It
-	 * determines if user input is an integer (phone number) or String (last/first
-	 * name).
+	 * Initial (zero-level) point for searching contacts in the phone base. It determines
+	 * if user input is an integer (phone number) or String (last/first name). 
 	 * 
 	 * @param user
 	 *            input to check
@@ -57,8 +56,7 @@ public class DataSearch {
 			} else {
 				return searchByNumber(number);
 			}
-			// catching String input and too long numbers (higher than Integer.MAX_VALUE
-			// also)
+			// catching String input and too long numbers (higher than Integer.MAX_VALUE also)
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -82,8 +80,8 @@ public class DataSearch {
 	/**
 	 * Searches the phone base by the first name (Person.firstName) or the last name
 	 * (Person.lastName). Set collection is used to avoid adding to the resulting
-	 * {@link #foundContacts} collection the same contact if one contact has the
-	 * same first and last name e.g., John John.
+	 * {@link #foundContacts} collection the same contact if one contact has 
+	 * the same first and last name e.g., John John.
 	 * 
 	 * @param name
 	 *            first and/or last name to be found in the phone base
@@ -134,10 +132,9 @@ public class DataSearch {
 	/**
 	 * Searches the phone base by the first name (Person.firstName) and the last
 	 * name (Person.lastName). Order of the entered words is irrelevant. Searching
-	 * contacts mechanism (similarly as adding contact mechanism) allows to
-	 * save/find contacts whose first and last names are converted (as far as they
-	 * have different phone numbers), as given in the example: John Smith vs. Smith
-	 * John.
+	 * contacts mechanism (similarly as adding contact mechanism) allows to save/find 
+	 * contacts whose first and last names are converted (as far as they have
+	 * different phone numbers), as given in the example: John Smith vs. Smith John.
 	 * 
 	 * @param name
 	 *            array of two Strings - first and last name - to be found in the

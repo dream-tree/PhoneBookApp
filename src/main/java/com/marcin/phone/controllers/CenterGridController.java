@@ -84,8 +84,8 @@ public class CenterGridController {
 		});
 
 		/**
-		 * Setting an action for pressing Enter key while Submit button is active. Enter
-		 * key is the default active button set by submit.setDefaultButton(true).
+		 * Setting an action for pressing Enter key while Submit button is active.
+		 * Enter key is the default active button set by submit.setDefaultButton(true).
 		 */
 		grid.getSubmitButton().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -134,18 +134,17 @@ public class CenterGridController {
 		});
 
 		/**
-		 * Setting an action for pressing Change button: if no toggle is selected, it
-		 * pops up a new window with text: search and select a contact first else; if
-		 * any toggle is selected, it creates a new pop-up window (a form to modify or
-		 * add new data).
+		 * Setting an action for pressing Change button: if no toggle is selected,
+		 * it pops up a new window with text: search and select a contact first else;
+		 * if any toggle is selected, it creates a new pop-up window (a form to modify
+		 * or add new data).
 		 */
 		grid.getChangeButton().setOnAction(x -> {
 			if (obtained[0] == null) {
 				showContactNotSelectedAlertDialog();
 			} else {
 				// it passes selected Person to pop up window constructing FillingForm object
-				// (controller/view)
-				// to keep in memory chosen contact by user
+				// (controller/view) to keep in memory chosen contact by user
 				formView.createGrid(obtained[0]);
 				System.out.println("CenterGridController #1: " + formView.getChosenContact().getNumber());
 				fillingFormController.initController();
@@ -158,8 +157,8 @@ public class CenterGridController {
 		grid.getAddButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// initializing 'obtained' with "no person", so no info from radioButtonGroup is
-				// passed to FillingFormController
+				// initializing 'obtained' with "no person", so no info from radioButtonGroup 
+				// is passed to FillingFormController
 				formView.createGrid(new Person("", "", -1));
 				fillingFormController.initController();
 			}
@@ -185,8 +184,8 @@ public class CenterGridController {
 	}
 
 	/**
-	 * Initializes searching process in DataOperations component. and proceeds with
-	 * the incoming results.
+	 * Initializes searching process in DataOperations component
+	 * and proceeds with the incoming results.
 	 */
 	public void processUserInput() {
 		Set<Person> foundContacts = dataSearch.initSearch(grid.getSearchBar().getText());
@@ -205,14 +204,11 @@ public class CenterGridController {
 					Person personFound = it.next();
 					if (personFound.getFirstName().equals("No contact found.")) {
 						i--;
-						System.out.println("1");
 						continue;
 					}
-					System.out.println("2");
 					appInfo[i].setText(personFound.toString());
 					radioButtonArray[i].setVisible(true);
-					radioButtonArray[i].setUserData(personFound); // binds selected toggle with 'object' in given Label
-																	// field
+					radioButtonArray[i].setUserData(personFound);
 					i++;
 				}
 			} else {
@@ -234,8 +230,8 @@ public class CenterGridController {
 				}
 			}
 		}
-		// without clear(), new searches are added to foundContacts set and previous
-		// searches are also displayed
+		// without clear(), new searches are added to foundContacts set
+		// and previous searches are also displayed
 		foundContacts.clear();
 	}
 
@@ -273,8 +269,7 @@ public class CenterGridController {
 	}
 
 	/**
-	 * Notifies user if there is no contact selected after pressing Change or Delete
-	 * button.
+	 * Notifies user if there is no contact selected after pressing Change or Delete button.
 	 */
 	public void showContactNotSelectedAlertDialog() {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -287,8 +282,7 @@ public class CenterGridController {
 	}
 
 	/**
-	 * Asks for the confirmation if user wants to delete chosen contact from the
-	 * phone base.
+	 * Asks for the confirmation if user wants to delete chosen contact from the phone base.
 	 */
 	public boolean isToDeleteAlertDialog() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
