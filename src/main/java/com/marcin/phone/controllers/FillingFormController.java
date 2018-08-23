@@ -35,7 +35,7 @@ public class FillingFormController {
 	}
 
 	/**
-	 * Initializes the controller for the application main window i.e., controller
+	 * Initializes the controller for the FillingForm window i.e., controller
 	 * for Save button and controller for Cancel button.
 	 */
 	public void initController() {
@@ -48,8 +48,7 @@ public class FillingFormController {
 				// clearing previous info displayed in the application info field (label)
 				formView.getFormAppInfo().setText("");
 				// flag checking if user wants to add or change existing contact:
-				// gets existing phone number if changeButton was pressed or -1 if addButton was
-				// pressed
+				// gets existing phone number if changeButton was pressed or -1 if addButton was pressed
 				int userChoice = formView.getChosenContact().getNumber();
 				if (isFormFilled()) {
 					validator.proceedUserInput(userChoice);
@@ -70,8 +69,7 @@ public class FillingFormController {
 					// clearing previous info displayed in info label
 					formView.getFormAppInfo().setText("");
 					// flag checking if user wants to add or change existing contact:
-					// gets existing phone number if changeButton was pressed or -1 if addButton was
-					// pressed
+					// gets existing phone number if changeButton was pressed or -1 if addButton was pressed
 					int userChoice = formView.getChosenContact().getNumber();
 					if (isFormFilled()) {
 						validator.proceedUserInput(userChoice);
@@ -106,7 +104,7 @@ public class FillingFormController {
 	}
 
 	/**
-	 * Checks if all text fields are filled by the user.
+	 * Checks if all text fields are filled by user.
 	 * 
 	 * @return true if all fields are filled by user
 	 */
