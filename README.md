@@ -16,12 +16,6 @@ Project #003.
 
 ----
 
-TODO in the future releases:
-- logging,
-- unit testing.
-
-----
-
 This project and the solutions it introduce, like every single one in my repositories, was not based on any ready-made internet or book project sample, any tutorial or anyone else idea other than me. All solutions are made by me, to practice coding and solving problems. Google was a friend of mine (of course) but all the implemented features in my projects are developed or implemented solely by me. That means I did not used any ready project templates from any external sources.
 
 ----
