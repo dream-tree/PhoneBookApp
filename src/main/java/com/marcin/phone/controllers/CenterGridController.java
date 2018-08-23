@@ -136,8 +136,7 @@ public class CenterGridController {
 		/**
 		 * Setting an action for pressing Change button: if no toggle is selected,
 		 * it pops up a new window with text: search and select a contact first else;
-		 * if any toggle is selected, it creates a new pop-up window (a form to modify
-		 * or add new data).
+		 * if any toggle is selected, it creates a new pop-up window (a form to modify or add new data).
 		 */
 		grid.getChangeButton().setOnAction(x -> {
 			if (obtained[0] == null) {
@@ -146,7 +145,6 @@ public class CenterGridController {
 				// it passes selected Person to pop up window constructing FillingForm object
 				// (controller/view) to keep in memory chosen contact by user
 				formView.createGrid(obtained[0]);
-				System.out.println("CenterGridController #1: " + formView.getChosenContact().getNumber());
 				fillingFormController.initController();
 			}
 		});
@@ -219,10 +217,8 @@ public class CenterGridController {
 					Person personFound = it.next();
 					if (personFound.getFirstName().equals("No contact found.")) {
 						i--;
-						System.out.println("3");
 						continue;
 					}
-					System.out.println("4");
 					appInfo[i].setText(personFound.toString());
 					radioButtonArray[i].setVisible(true);
 					radioButtonArray[i].setUserData(personFound);
